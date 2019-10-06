@@ -5,13 +5,14 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author User
  */
-public class Pokupki {
+public class Pokupki implements Serializable {
 
     private Product product;
     private Buyer buyer;
