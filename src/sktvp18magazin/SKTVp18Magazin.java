@@ -5,9 +5,11 @@
  */
 package sktvp18magazin;
 
+import Classes.App;
+
 /**
  *
- * @author User
+ * @author User1
  */
 public class SKTVp18Magazin {
 
