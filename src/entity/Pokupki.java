@@ -1,79 +1,115 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
- * @author User
+ * @author user
  */
-public class Pokupki implements Serializable {
-
+@Entity
+public class Pokupki implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne()
     private Product product;
+    @OneToOne()
     private Buyer buyer;
-    private int amount;//koli4estvo wtuk
-    private int payment;//platez
+    @Temporal(TemporalType.TIMESTAMP)
     private Date takeOn;
+   
 
     public Pokupki() {
     }
 
-    public Pokupki(Product product, Buyer buyer, int amount, int payment, Date takeOn) {
-        this.product = product;
-        this.buyer = buyer;
-        this.amount = amount;
-        this.payment = payment;
-        this.takeOn = takeOn;
+   
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.product);
+        hash = 97 * hash + Objects.hashCode(this.buyer);
+        hash = 97 * hash + Objects.hashCode(this.takeOn);
+
+        return hash;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pokupki other = (Pokupki) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.product, other.product)) {
+            return false;
+        }
+        if (!Objects.equals(this.buyer, other.buyer)) {
+            return false;
+        }
+        if (!Objects.equals(this.takeOn, other.takeOn)) {
+            return false;
+        }
+        
+        return true;
     }
 
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
+    public Long getId() {
+        return id;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public void setPayment(int payment) {
-        this.payment = payment;
-    }
-
-    public void setTakeOn(Date takeOn) {
-        this.takeOn = takeOn;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Product getProduct() {
         return product;
     }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public Buyer getBuyer() {
         return buyer;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public int getPayment() {
-        return payment;
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     public Date getTakeOn() {
         return takeOn;
     }
 
-    @Override
-    public String toString() {
-        return "Pokupki{" + "product=" + product + ", buyer=" + buyer + ", amount=" + amount + ", payment=" + payment + ", takeOn=" + takeOn + '}';
+    public void setTakeOn(Date takeOn) {
+        this.takeOn = takeOn;
     }
 
+  
+
+    @Override
+    public String toString() {
+        return "Pokupki{" + "product=" + product + ", buyer=" + buyer + ", takeOn=" + takeOn +'}';
+    }
+    
 }

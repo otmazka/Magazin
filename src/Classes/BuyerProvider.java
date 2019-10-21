@@ -8,10 +8,6 @@ package Classes;
 import entity.Buyer;
 import java.util.Scanner;
 
-/**
- *
- * @author User
- */
 public class BuyerProvider {
      public Buyer createBuyer(){
         Scanner scanner = new Scanner(System.in);
