@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,9 +23,13 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    @Override
-    public String toString() {
-        return "Tovar{" + "title=" + title + ", vid=" + vid + ", price=" + price + ", quantity=" + quantity + ", count=" + count + '}';
+    public Product(Long id, String title, String vid, int price, int quantity, int count) {
+        this.id = id;
+        this.title = title;
+        this.vid = vid;
+        this.price = price;
+        this.quantity = quantity;
+        this.count = count;
     }
 
     public Long getId() {
@@ -73,5 +78,55 @@ public class Product implements Serializable {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "title=" + title + ", vid=" + vid + ", price=" + price + ", quantity=" + quantity + ", count=" + count + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.title);
+        hash = 53 * hash + Objects.hashCode(this.vid);
+        hash = 53 * hash + this.price;
+        hash = 53 * hash + this.quantity;
+        hash = 53 * hash + this.count;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (this.price != other.price) {
+            return false;
+        }
+        if (this.quantity != other.quantity) {
+            return false;
+        }
+        if (this.count != other.count) {
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.vid, other.vid)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 }
